@@ -3,32 +3,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Greysama.tv</title>
+    <title>GREYSAMA.TV</title>
+    <style>
+        :root {
+            --pure-black: #000000;
+            --yt-red: rgba(255, 0, 0, 0.4);
+            --tw-purple: rgba(169, 112, 255, 0.4);
+            --silver: linear-gradient(to right, #555, #fff, #555);
+        }
+        body { margin: 0; background: var(--pure-black); color: white; font-family: 'Helvetica Neue', sans-serif; overflow-x: hidden; }
+
+        /* Intro Animation */
+        #intro { position: fixed; inset: 0; background: var(--pure-black); z-index: 999; display: flex; justify-content: center; align-items: center; transition: transform 1.2s cubic-bezier(0.85, 0, 0.15, 1); }
+        .hide-intro { transform: translateY(-100%); }
+
+        /* Logo & Shimmer */
+        .header { text-align: center; padding: 2rem 0 1rem; }
+        .shimmer { font-size: 2.5rem; font-weight: 900; letter-spacing: 4px; background: var(--silver); background-size: 200%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: shim 3s infinite linear; cursor: default; transition: 0.3s; }
+        .shimmer:hover { transform: scale(1.05); text-shadow: 0 0 20px rgba(255,255,255,0.2); }
+        @keyframes shim { to { background-position: 200% center; } }
+
+        /* Desktop Grid - Side by Side */
+        .grid-container { display: flex; width: 95%; max-width: 1400px; margin: 0 auto; gap: 20px; transition: 0.5s; }
+        .stream-box { flex: 1; aspect-ratio: 16/9; border-radius: 12px; overflow: hidden; transition: 0.4s; position: relative; }
+        .stream-box iframe { width: 100%; height: 100%; border: none; }
+        
+        /* Persistent Glows */
+        .box-yt { box-shadow: 0 0 40px var(--yt-red); }
+        .box-tw { box-shadow: 0 0 40px var(--tw-purple); }
+
+        /* Desktop Hover Focus Effect */
+        @media (min-width: 900px) {
+            .stream-box:hover { transform: scale(1.02); z-index: 10; }
+            .grid-container:hover .stream-box:not(:hover) { opacity: 0.3; filter: grayscale(60%); }
+            .mobile-controls { display: none !important; }
+        }
+
+        /* Mobile Active Stage (Toggle) */
+        .mobile-controls { display: none; justify-content: center; gap: 15px; margin-top: 25px; padding-bottom: 30px; }
+        .mobile-controls button { padding: 12px 24px; border-radius: 30px; border: 1px solid #333; background: #111; color: #888; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        .mobile-controls button.active { border-color: white; color: white; background: #222; }
+
+        @media (max-width: 899px) {
+            .grid-container { flex-direction: column; max-width: 100%; }
+            .stream-box { display: none; width: 100%; box-shadow: none; border-radius: 0; }
+            .stream-box.active-mobile { display: block; }
+            .mobile-controls { display: flex; }
+            /* Mobile Bottom Glows */
+            .grid-container.yt-glow { box-shadow: 0 -20px 50px -20px var(--yt-red) inset; }
+            .grid-container.tw-glow { box-shadow: 0 -20px 50px -20px var(--tw-purple) inset; }
+        }
+    </style>
 </head>
 <body>
 
-<div id="intro-overlay">
-    <h1 class="shimmer-logo">SAMA</h1>
-</div>
+    <div id="intro">
+        <h1 class="shimmer" style="font-size: 4rem;">SAMA</h1>
+    </div>
 
-<div class="main-container">
-    <header>
-        <h1 class="shimmer-logo" id="main-logo">GREYSAMA.TV</h1>
-    </header>
+    <div class="header">
+        <h1 class="shimmer">GREYSAMA.TV</h1>
+    </div>
 
-    <div id="video-stage" class="stage-yt"> <div id="yt-player" class="player-wrapper active">
-            <iframe src="https://www.youtube.com/embed/live_stream?channel=YOUR_CHANNEL_ID" frameborder="0" allowfullscreen></iframe>
+    <div id="stream-container" class="grid-container yt-glow">
+        <div id="yt-box" class="stream-box box-yt active-mobile">
+            <iframe src="https://www.youtube.com/embed/live_stream?channel=UCxBVf-A_6bnjVHFLPOxFQ5w" allowfullscreen></iframe>
         </div>
-        <div id="twitch-player" class="player-wrapper">
-             <iframe src="https://player.twitch.tv/?channel=YOUR_TWITCH_NAME&parent=greysama.tv" frameborder="0" allowfullscreen></iframe>
+        <div id="tw-box" class="stream-box box-tw">
+            <iframe src="https://player.twitch.tv/?channel=greysamatv&parent=greysama.tv" allowfullscreen></iframe>
         </div>
     </div>
 
-    <div class="toggle-container">
-        <button onclick="switchMode('yt')" id="btn-yt" class="toggle-btn active">🔴 YOUTUBE</button>
-        <button onclick="switchMode('twitch')" id="btn-twitch" class="toggle-btn">🟣 TWITCH</button>
+    <div class="mobile-controls">
+        <button id="btn-yt" class="active" onclick="toggleMobile('yt')">🔴 YOUTUBE</button>
+        <button id="btn-tw" onclick="toggleMobile('tw')">🟣 TWITCH</button>
     </div>
-</div>
 
+    <script>
+        // Intro Reveal
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('intro').classList.add('hide-intro');
+            }, 1500);
+        });
+
+        // Mobile Toggle Logic
+        function toggleMobile(platform) {
+            if (window.innerWidth >= 900) return; // Keep desktop side-by-side
+            
+            const isYt = platform === 'yt';
+            
+            document.getElementById('yt-box').classList.toggle('active-mobile', isYt);
+            document.getElementById('tw-box').classList.toggle('active-mobile', !isYt);
+            
+            document.getElementById('stream-container').className = isYt ? 'grid-container yt-glow' : 'grid-container tw-glow';
+            
+            document.getElementById('btn-yt').classList.toggle('active', isYt);
+            document.getElementById('btn-tw').classList.toggle('active', !isYt);
+        }
+
+        // Auto-correct layout if phone is rotated to landscape
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 900) {
+                document.getElementById('yt-box').classList.add('active-mobile');
+                document.getElementById('tw-box').classList.add('active-mobile');
+            } else {
+                const ytActive = document.getElementById('btn-yt').classList.contains('active');
+                toggleMobile(ytActive ? 'yt' : 'tw');
+            }
+        });
+    </script>
 </body>
 </html>
