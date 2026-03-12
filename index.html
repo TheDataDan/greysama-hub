@@ -10,7 +10,6 @@
             margin: 0;
             padding: 0;
             background-color: #0d0d0d; 
-            /* Backlit Vignette: Purple Top-Right, Red Bottom-Left */
             background-image: 
                 radial-gradient(circle at 90% 10%, rgba(100, 65, 165, 0.15) 0%, transparent 40%),
                 radial-gradient(circle at 10% 90%, rgba(255, 0, 0, 0.12) 0%, transparent 40%);
@@ -41,7 +40,6 @@
         .brand-handle {
             color: #fff;
             font-weight: 600;
-            text-transform: none; /* Keeps the casing clean */
         }
 
         .social-icons {
@@ -52,7 +50,6 @@
             font-size: 1.8rem;
         }
 
-        /* The "Fire" Tweak: Icon Hover Animation */
         .social-icons a {
             text-decoration: none;
             transition: transform 0.2s ease;
@@ -102,7 +99,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Mobile Fix: Side-by-Side if screen is wide, stacked if narrow */
         @media (max-width: 1200px) {
             .player-card { width: 90%; max-width: 500px; height: 280px; }
             .hub-wrapper { gap: 20px; }
@@ -130,7 +126,7 @@
 
     <div class="hub-wrapper">
         <div class="player-card">
-            <iframe src="https://www.youtube.com/embed/live_stream?channel=UCxBVf-A_6bnjVHFLPOxFQ5w" allowfullscreen></iframe>
+            <iframe src="https://www.youtube.com/embed?listType=user_uploads&list=UCxBVf-A_6bnjVHFLPOxFQ5w" allowfullscreen></iframe>
         </div>
 
         <div class="player-card">
