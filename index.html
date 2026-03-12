@@ -3,39 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Greysama.tv | Media Hub</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Greysama.tv</title>
 </head>
 <body>
 
-    <div class="header">
-        <h1>Follow <span class="brand-handle">Greysama</span></h1>
-        <div class="social-icons">
-            <a href="https://www.youtube.com/@GreysamaTV" target="_blank" rel="noopener noreferrer">
-                <i class="fa-brands fa-youtube" style="color: #ff0000;"></i>
-            </a>
-            <a href="https://www.twitch.tv/greysamatv" target="_blank" rel="noopener noreferrer">
-                <i class="fa-brands fa-twitch" style="color: #9146ff;"></i>
-            </a>
+<div id="intro-overlay">
+    <h1 class="shimmer-logo">SAMA</h1>
+</div>
+
+<div class="main-container">
+    <header>
+        <h1 class="shimmer-logo" id="main-logo">GREYSAMA.TV</h1>
+    </header>
+
+    <div id="video-stage" class="stage-yt"> <div id="yt-player" class="player-wrapper active">
+            <iframe src="https://www.youtube.com/embed/live_stream?channel=YOUR_CHANNEL_ID" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <div id="twitch-player" class="player-wrapper">
+             <iframe src="https://player.twitch.tv/?channel=YOUR_TWITCH_NAME&parent=greysama.tv" frameborder="0" allowfullscreen></iframe>
         </div>
     </div>
 
-    <div class="hub-wrapper">
-        <div class="player-card">
-            <iframe 
-    src="https://www.youtube.com/embed?listType=playlist&list=UU_YOUR_CHANNEL_ID_HERE" 
-    frameborder="0" 
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-    allowfullscreen>
-</iframe>
-        </div>
-
-        <div class="player-card">
-            <iframe src="https://player.twitch.tv/?channel=greysamatv&parent=greysama.live&parent=www.greysama.live&parent=greysama.tv&parent=www.greysama.tv&autoplay=false" allowfullscreen></iframe>
-        </div>
+    <div class="toggle-container">
+        <button onclick="switchMode('yt')" id="btn-yt" class="toggle-btn active">🔴 YOUTUBE</button>
+        <button onclick="switchMode('twitch')" id="btn-twitch" class="toggle-btn">🟣 TWITCH</button>
     </div>
+</div>
 
 </body>
 </html>
