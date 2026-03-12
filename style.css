@@ -1,59 +1,112 @@
-/* style.css - Complete Version */
+<style>
+:root {
+    --bg-color: #0a0a0a;
+    --yt-red: rgba(255, 0, 0, 0.2);
+    --tw-purple: rgba(169, 112, 255, 0.2);
+    --silver: linear-gradient(to right, #777 0%, #fff 50%, #777 100%);
+}
+
 body {
-    margin: 0; padding: 0;
-    background-color: #0d0d0d; 
-    /* Backlit Vignette */
-    background-image: 
-        radial-gradient(circle at 90% 10%, rgba(100, 65, 165, 0.2) 0%, transparent 50%),
-        radial-gradient(circle at 10% 90%, rgba(255, 0, 0, 0.15) 0%, transparent 50%);
-    background-attachment: fixed;
-    min-height: 100vh;
-    display: flex; flex-direction: column;
-    justify-content: center; align-items: center;
-    font-family: 'Inter', system-ui, sans-serif;
-    color: #e0e0e0; overflow-x: hidden;
+    background-color: var(--bg-color);
+    color: white;
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    overflow-x: hidden;
 }
 
-.header { margin-bottom: 30px; text-align: center; animation: fadeIn 1.5s ease-in; }
-.header h1 { font-weight: 300; letter-spacing: 2px; font-size: 1.2rem; color: #888; }
-.brand-handle { color: #fff; font-weight: 600; }
-.social-icons { margin-top: 10px; display: flex; gap: 20px; justify-content: center; font-size: 1.5rem; }
-
-.hub-wrapper {
-    display: flex; gap: 40px; padding: 20px;
-    flex-wrap: wrap; justify-content: center; width: 100%;
+/* SILVER SHIMMER ANIMATION */
+.shimmer-logo {
+    font-size: 3rem;
+    font-weight: 900;
+    letter-spacing: -2px;
+    background: var(--silver);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: 0.5s ease;
+    cursor: default;
 }
 
-.player-card {
-    background: rgba(20, 20, 20, 0.8);
-    border-radius: 12px; padding: 10px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.6);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255,255,255,0.05);
-    transition: all 0.3s ease;
-    width: 560px; height: 315px;
+.shimmer-logo:hover {
+    transform: scale(1.05);
+    animation: shimmer 1.5s infinite linear;
 }
 
-iframe { width: 100%; height: 100%; border-radius: 6px; border: none; }
+@keyframes shimmer {
+    to { background-position: 200% center; }
+}
 
-/* Mobile Side-by-Side & Tints */
+/* INTRO TRANSITION */
+#intro-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    animation: fadeOut 2s forwards;
+    animation-delay: 1.5s;
+}
+
+@keyframes fadeOut {
+    to { opacity: 0; visibility: hidden; }
+}
+
+/* THE STAGE & GLOWS */
+#video-stage {
+    position: relative;
+    width: 90%;
+    max-width: 1000px;
+    margin: 20px auto;
+    aspect-ratio: 16 / 9;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: box-shadow 0.5s ease;
+}
+
+.stage-yt { box-shadow: 0 0 50px var(--yt-red); }
+.stage-twitch { box-shadow: 0 0 50px var(--tw-purple); }
+
+.player-wrapper {
+    display: none;
+    width: 100%;
+    height: 100%;
+}
+
+.player-wrapper.active { display: block; }
+
+iframe { width: 100%; height: 100%; }
+
+/* MOBILE TOGGLE SWITCH */
+.toggle-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 30px;
+}
+
+.toggle-btn {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    color: #888;
+    padding: 12px 24px;
+    border-radius: 50px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.toggle-btn.active {
+    color: white;
+    border-color: #fff;
+    background: #222;
+}
+
+/* MOBILE OPTIMIZATION */
 @media (max-width: 768px) {
-    .header { margin-bottom: 15px; }
-    .hub-wrapper { flex-direction: row; gap: 8px; padding: 10px; flex-wrap: nowrap; }
-    .player-card { 
-        flex: 1; height: 120px; padding: 4px; 
-        box-shadow: 0 10px 20px rgba(0,0,0,0.5);
-    }
-    /* YouTube Red Tint (Left) */
-    .player-card:first-child { 
-        background: linear-gradient(135deg, #0d0d0d 30%, rgba(139, 0, 0, 0.4)); 
-        border-color: rgba(255, 0, 0, 0.2); 
-    }
-    /* Twitch Purple Tint (Right) */
-    .player-card:last-child { 
-        background: linear-gradient(225deg, #0d0d0d 30%, rgba(100, 65, 165, 0.45)); 
-        border-color: rgba(100, 65, 165, 0.3); 
-    }
+    .shimmer-logo { font-size: 1.8rem; }
+    #video-stage { width: 95%; aspect-ratio: 16 / 9; }
+    .toggle-btn { flex: 1; font-size: 0.8rem; }
 }
-
-@keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+</style>
