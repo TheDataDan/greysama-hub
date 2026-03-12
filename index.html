@@ -3,70 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Greysama.tv</title>
+    <title>Greysama.tv | Media Hub</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        body {
-            margin: 0;
-            background-color: #050505; /* Deep black for OLED */
-            color: white;
-            font-family: -apple-system, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        /* HEADER (Matched to your original screenshot) */
-        .header { text-align: center; margin-top: 40px; }
-        .follow-text { color: #888; font-size: 0.95rem; margin-bottom: 12px; }
-        .name { font-weight: 700; color: white; }
-        .icons { display: flex; gap: 20px; justify-content: center; margin-top: 10px; font-size: 1.4rem;}
-        .fa-youtube { color: #ff0000; }
-        .fa-twitch { color: #9146FF; }
-
-        /* MOBILE SIDE-BY-SIDE (Condensed Rectangles) */
-        .stage {
-            display: flex;
-            flex-direction: row; /* Forces side-by-side on all screens */
-            width: 96%;
-            max-width: 1200px;
-            gap: 8px;
-            margin-top: 35px;
-        }
-
-        .box {
-            flex: 1;
-            aspect-ratio: 16 / 9; 
-            background: #111;
-            border-radius: 6px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        /* THE MOODY TINTS */
-        .yt-box { box-shadow: 0 0 35px rgba(255, 0, 0, 0.15); border: 1px solid rgba(255, 0, 0, 0.2); }
-        .tw-box { box-shadow: 0 0 35px rgba(145, 70, 255, 0.15); border: 1px solid rgba(145, 70, 255, 0.2); }
-
-        iframe { width: 100%; height: 100%; border: none; }
-    </style>
 </head>
 <body>
 
     <div class="header">
-        <div class="follow-text">Follow <span class="name">GreysamaTV</span></div>
-        <div class="icons">
-            <a href="https://youtube.com/channel/UCxBVf-A_6bnjVHFLPOxFQ5w" target="_blank"><i class="fa-brands fa-youtube"></i></a>
-            <a href="https://twitch.tv/greysamatv" target="_blank"><i class="fa-brands fa-twitch"></i></a>
+        <h1>FOLLOW <span class="brand-handle">@GreysamaTV</span></h1>
+        <div class="social-icons">
+            <i class="fa-brands fa-youtube" style="color: #ff0000;"></i>
+            <i class="fa-brands fa-twitch" style="color: #9146ff;"></i>
         </div>
     </div>
 
-    <div class="stage">
-        <div class="box yt-box">
-            <iframe src="https://www.youtube.com/embed/live_stream?channel=UCxBVf-A_6bnjVHFLPOxFQ5w" allowfullscreen></iframe>
+    <div class="hub-wrapper">
+        <div class="player-card">
+            <iframe src="https://www.youtube.com/embed?listType=user_uploads&list=UCxBVf-A_6bnjVHFLPOxFQ5w" allowfullscreen></iframe>
         </div>
 
-        <div class="box tw-box">
-            <iframe src="https://player.twitch.tv/?channel=greysamatv&parent=greysama.tv" allowfullscreen></iframe>
+        <div class="player-card">
+            <iframe src="https://player.twitch.tv/?channel=greysamatv&parent=greysama.live&parent=www.greysama.live&parent=greysama.tv&parent=www.greysama.tv&autoplay=false" allowfullscreen></iframe>
         </div>
     </div>
 
